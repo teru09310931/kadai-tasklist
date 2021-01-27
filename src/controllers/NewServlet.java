@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.sql.Timestamp;
 
 import javax.persistence.EntityManager;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -53,9 +54,17 @@ public class NewServlet extends HttpServlet {
         em.persist(t);
         em.getTransaction().commit();
 
-        // 自動採番されたIDの値を表示
+        // 自動採番sされたIDの値を表示
         response.getWriter().append(Integer.valueOf(t.getId()).toString());
 
         em.close();
+
+        request.setAttribute("_token", request.getSession().getId());
+
+        // おまじないとしてのインスタンスを生成
+        request.setAttribute("task", new Task());
+
+        RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/tasks/new.jsp");
+        rd.forward(request, response);
      }
 }
