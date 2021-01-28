@@ -36,21 +36,14 @@ public class NewServlet extends HttpServlet {
         EntityManager em = DBUtil.createEntityManager();
         em.getTransaction().begin();
 
-        // Messageのインスタンスを生成
+        // Taskのインスタンスを生成
         Task t = new Task();
-
-        // mの各フィールドにデータを代入
-        String title = "taro";
-        t.setTitle(title);
-
-        String content = "hello";
-        t.setContent(content);
 
         Timestamp currentTime = new Timestamp(System.currentTimeMillis());     // 現在の日時を取得
         t.setCreated_at(currentTime);
         t.setUpdated_at(currentTime);
 
-        // データベースに保存ss
+        // データベースに保存
         em.persist(t);
         em.getTransaction().commit();
 
