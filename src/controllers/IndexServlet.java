@@ -49,6 +49,8 @@ public class IndexServlet extends HttpServlet {
                 .setMaxResults(15)
                 .getResultList();
 
+        response.getWriter().append(Integer.valueOf(tasks.size()).toString());
+
 
         // 全件数を取得
         long tasks_count = (long)em.createNamedQuery("getTasksCount", Long.class)
