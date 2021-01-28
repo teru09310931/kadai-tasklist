@@ -41,7 +41,6 @@ public class CreateServlet extends HttpServlet {
 
             Task t = new Task();
 
-
             String content = request.getParameter("content");
             t.setContent(content);
 
@@ -67,6 +66,7 @@ public class CreateServlet extends HttpServlet {
                 em.getTransaction().begin();
                 em.persist(t);
                 em.getTransaction().commit();
+                // ここを追記
                 request.getSession().setAttribute("flush", "登録が完了しました。");
                 em.close();
 
